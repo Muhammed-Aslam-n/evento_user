@@ -1,5 +1,5 @@
 import 'package:evento_user/constants/constants.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/review_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

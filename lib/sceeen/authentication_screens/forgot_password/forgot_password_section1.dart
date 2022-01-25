@@ -1,7 +1,9 @@
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/constants/constants.dart';
 import 'package:evento_user/controller/getx_controller.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/button.dart';
+import 'package:evento_user/widgets/data_textfield.dart';
+import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

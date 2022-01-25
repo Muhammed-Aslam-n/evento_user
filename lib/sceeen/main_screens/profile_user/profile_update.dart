@@ -1,7 +1,9 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/getx_controller.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/button.dart';
+import 'package:evento_user/widgets/data_textfield.dart';
+import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -107,13 +109,14 @@ class UpdateProfile extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: commonButton(
-                    height: 60.h,
-                    width: 100.w,
-                    text: "Update",
-                    textSize: 14.5,
-                    onPressed: () {
-                      confirmUser(context);
-                    }),
+                  height: 60.h,
+                  width: 100.w,
+                  text: "Update",
+                  textSize: 14.5,
+                  onPressed: () {
+                    confirmUser(context);
+                  },
+                ),
               ),
             ],
           ),
@@ -139,7 +142,7 @@ class UpdateProfile extends StatelessWidget {
           DataTextFields(
             minLength: 9,
             controller:
-            EventoController.eventoController.passwordEditingController,
+                EventoController.eventoController.passwordEditingController,
             textInputType: TextInputType.name,
             hintText: "Your password",
           ),
@@ -153,8 +156,7 @@ class UpdateProfile extends StatelessWidget {
           ),
           DataTextFields(
             minLength: 9,
-            controller:
-            EventoController.eventoController.userStateController,
+            controller: EventoController.eventoController.userStateController,
             textInputType: TextInputType.name,
             hintText: "Your password",
           ),

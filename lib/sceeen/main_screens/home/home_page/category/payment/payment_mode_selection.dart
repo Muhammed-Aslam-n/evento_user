@@ -1,6 +1,6 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:evento_user/constants/colors.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -3,7 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/getx_controller.dart';
 import 'package:evento_user/sceeen/main_screens/home/home_page/homewidgets.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/profiledisplay_widget.dart';
+import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -40,7 +41,7 @@ class UserHome extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     color: const Color(0xFFEDEDED),
                   ),
-                  child: const ListTile(
+                  child:  const ListTile(
                       title: CommonText(
                         text: "Hello",
                         color: Color(0xFFC1C1B7),

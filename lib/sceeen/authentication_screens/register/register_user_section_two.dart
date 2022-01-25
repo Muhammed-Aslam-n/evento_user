@@ -1,15 +1,17 @@
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/constants/constants.dart';
 import 'package:evento_user/controller/getx_controller.dart';
-import 'package:evento_user/sceeen/authentication_screens/register/setup_profile.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/button.dart';
+import 'package:evento_user/widgets/data_textfield.dart';
+import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:get/get.dart';
 
 class RegisterUserSectionTwo extends StatelessWidget {
   RegisterUserSectionTwo({Key? key}) : super(key: key);
+
+  final controller = EventoController.eventoController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -67,8 +69,7 @@ class RegisterUserSectionTwo extends StatelessWidget {
                                     height: 4.h,
                                   ),
                                   DataTextFields(
-                                    controller: EventoController
-                                        .eventoController.phoneNumberController,
+                                    controller: controller.phoneNumberController,
                                     textInputType: TextInputType.number,
                                     hintText: "Mobile number",
                                     obscureText: false,
@@ -89,8 +90,7 @@ class RegisterUserSectionTwo extends StatelessWidget {
                                     height: 4.h,
                                   ),
                                   DataTextFields(
-                                    controller: EventoController
-                                        .eventoController.emailEditingController,
+                                    controller: controller.emailEditingController,
                                     textInputType: TextInputType.emailAddress,
                                     hintText: "Login email",
                                     obscureText: false,
@@ -112,8 +112,7 @@ class RegisterUserSectionTwo extends StatelessWidget {
                                   ),
                                   DataTextFields(
                                     minLength: 8,
-                                    controller: EventoController
-                                        .eventoController.passwordEditingController,
+                                    controller: controller.passwordEditingController,
                                     textInputType: TextInputType.visiblePassword,
                                     hintText: "Enter your password",
                                     obscureText: true,
@@ -134,7 +133,7 @@ class RegisterUserSectionTwo extends StatelessWidget {
                                   ),
                                   DataTextFields(
                                     minLength: 8,
-                                    controller: EventoController.eventoController
+                                    controller: controller
                                         .confirmPasswordEditingController,
                                     textInputType: TextInputType.visiblePassword,
                                     hintText: "Re-enter password",
@@ -164,9 +163,9 @@ class RegisterUserSectionTwo extends StatelessWidget {
   }
   validateFormField(BuildContext context) {
     if(_formKey.currentState!.validate()){
-      Get.to(() => const SetupProfile());
+      controller.saveRegister2values();
+      controller.registerVendor();
       FocusScope.of(context).unfocus();
-      EventoController.eventoController.clearSignup2Controllers();
     }
   }
 }

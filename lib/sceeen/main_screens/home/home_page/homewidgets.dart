@@ -3,7 +3,8 @@ import 'package:evento_user/constants/constants.dart';
 import 'package:evento_user/controller/getx_controller.dart';
 import 'package:evento_user/sceeen/main_screens/feedback/feedback_user.dart';
 import 'package:evento_user/sceeen/main_screens/home/home_page/category/selected_category_vendors.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/simpledialogue.dart';
+import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -152,13 +153,6 @@ class CategoryDisplayWidget extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 shadows: shadow
               ),)
-              //
-              // CommonText(
-              //   text: categoryName,
-              //   size: 14.2,
-              //   color: whiteColor,
-              //   weight: FontWeight.w600,
-              // ),
             ),
           ),
         );

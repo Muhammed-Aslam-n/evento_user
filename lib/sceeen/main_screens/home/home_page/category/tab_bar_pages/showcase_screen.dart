@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:evento_user/constants/constants.dart';
 import 'package:evento_user/controller/getx_controller.dart';
-import 'package:evento_user/widgets/widget.dart';
+import 'package:evento_user/widgets/profile_detail_card.dart';
+import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ShowcaseScreen extends StatelessWidget {
