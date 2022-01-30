@@ -1,6 +1,6 @@
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/getx_controller.dart';
-import 'package:evento_user/sceeen/authentication_screens/login/login_user.dart';
+import 'package:evento_user/sceeen/authentication_screens/login/login_home.dart';
 import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,7 +61,7 @@ class OnBoarding extends StatelessWidget {
               child: IconButton(
                 onPressed: () {
                   EventoController.eventoController.setAppLaunched();
-                  Get.offAll(()=>const UserLogin());
+                  Get.offAll(()=>LoginHome());
                 },
                 icon: const Icon(
                   Icons.keyboard_arrow_right,

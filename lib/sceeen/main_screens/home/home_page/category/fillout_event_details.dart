@@ -1,5 +1,5 @@
 import 'package:evento_user/constants/colors.dart';
-import 'package:evento_user/controller/getx_controller.dart';
+import 'package:evento_user/controller/event_details_controller/event_details_fillout_controller.dart';
 import 'package:evento_user/sceeen/main_screens/home/home_page/category/event_details.dart';
 import 'package:evento_user/widgets/button.dart';
 import 'package:evento_user/widgets/data_textfield.dart';
@@ -7,12 +7,15 @@ import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+
 class FilloutEventDetails extends StatelessWidget {
-  const FilloutEventDetails({Key? key}) : super(key: key);
+  FilloutEventDetails({Key? key}) : super(key: key);
+
+  final eController = EventDetailsFilloutController.eDetailsFillController;
 
   @override
   Widget build(BuildContext context) {
-    EventoController.eventoController.clearVenueDetailsController();
     return SafeArea(
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -37,8 +40,7 @@ class FilloutEventDetails extends StatelessWidget {
                 ),
                 DataTextFields(
                   minLength: 9,
-                  controller: EventoController
-                      .eventoController.placeController,
+                  controller: eController.placeController,
                   textInputType: TextInputType.name,
                   hintText: "Name of venue",
                 ),
@@ -60,7 +62,7 @@ class FilloutEventDetails extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     textInputAction: TextInputAction.newline,
                     controller:
-                    EventoController.eventoController.venueAddressController,
+                    eController.venueAddressController,
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.only(
@@ -82,8 +84,7 @@ class FilloutEventDetails extends StatelessWidget {
                 ),
                 DataTextFields(
                   minLength: 9,
-                  controller: EventoController
-                      .eventoController.venueContact1Controller,
+                  controller: eController.venueContact1Controller,
                   textInputType: TextInputType.name,
                   hintText: "Mobile number",
                 ),
@@ -97,8 +98,7 @@ class FilloutEventDetails extends StatelessWidget {
                 ),
                 DataTextFields(
                   minLength: 9,
-                  controller: EventoController
-                      .eventoController.venueContact2Controller,
+                  controller: eController.venueContact2Controller,
                   textInputType: TextInputType.name,
                   hintText: "Mobile number",
                 ),

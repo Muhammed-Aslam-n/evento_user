@@ -96,6 +96,7 @@ class BackdropScaffoldItems extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
+            EventoController.eventoController.logoutVendor();
             debugPrint("Logging Out...");
           },
           child: const CommonText(

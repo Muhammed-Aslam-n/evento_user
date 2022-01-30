@@ -1,6 +1,6 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:evento_user/constants/colors.dart';
-import 'package:evento_user/controller/getx_controller.dart';
+import 'package:evento_user/controller/profile_updation/updateProfile.dart';
 import 'package:evento_user/widgets/button.dart';
 import 'package:evento_user/widgets/data_textfield.dart';
 import 'package:evento_user/widgets/text_common.dart';
@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UpdateProfile extends StatelessWidget {
-  const UpdateProfile({Key? key}) : super(key: key);
+  UpdateProfile({Key? key}) : super(key: key);
+  
+  final updateProfileCntrlr = UpdateProfileController.updateProfileController;
 
   @override
   Widget build(BuildContext context) {
-    EventoController.eventoController.clearUsernameUpdatingControllers();
+    // updateProfileCntrlr.clearUsernameUpdatingControllers();
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -40,7 +42,7 @@ class UpdateProfile extends StatelessWidget {
               DataTextFields(
                 minLength: 9,
                 controller:
-                    EventoController.eventoController.firstNameController,
+                    updateProfileCntrlr.nameController,
                 textInputType: TextInputType.name,
                 hintText: "Your name",
               ),
@@ -54,7 +56,7 @@ class UpdateProfile extends StatelessWidget {
               ),
               DataTextFields(
                 minLength: 9,
-                controller: EventoController.eventoController.placeController,
+                controller: updateProfileCntrlr.placeController,
                 textInputType: TextInputType.name,
                 hintText: "Your place",
               ),
@@ -69,7 +71,7 @@ class UpdateProfile extends StatelessWidget {
               DataTextFields(
                 minLength: 9,
                 controller:
-                    EventoController.eventoController.cityEditingController,
+                    updateProfileCntrlr.cityEditingController,
                 textInputType: TextInputType.name,
                 hintText: "Your city",
               ),
@@ -84,7 +86,7 @@ class UpdateProfile extends StatelessWidget {
               DataTextFields(
                 minLength: 9,
                 controller:
-                    EventoController.eventoController.districtController,
+                    updateProfileCntrlr.districtController,
                 textInputType: TextInputType.name,
                 hintText: "Your district",
               ),
@@ -99,7 +101,7 @@ class UpdateProfile extends StatelessWidget {
               DataTextFields(
                 minLength: 9,
                 controller:
-                    EventoController.eventoController.userStateController,
+                    updateProfileCntrlr.userStateController,
                 textInputType: TextInputType.name,
                 hintText: "Your state",
               ),
@@ -142,7 +144,7 @@ class UpdateProfile extends StatelessWidget {
           DataTextFields(
             minLength: 9,
             controller:
-                EventoController.eventoController.passwordEditingController,
+                updateProfileCntrlr.passwordController,
             textInputType: TextInputType.name,
             hintText: "Your password",
           ),
@@ -156,7 +158,7 @@ class UpdateProfile extends StatelessWidget {
           ),
           DataTextFields(
             minLength: 9,
-            controller: EventoController.eventoController.userStateController,
+            controller: updateProfileCntrlr.userStateController,
             textInputType: TextInputType.name,
             hintText: "Your password",
           ),

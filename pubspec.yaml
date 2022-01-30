@@ -31,20 +31,19 @@ dependencies:
     sdk: flutter
   fluttericon: any
   get: any
+  carousel_slider: any
   image_picker: any
   flutter_screenutil: any
-  carousel_slider: any
   razorpay_flutter: any
   dio: any
   http: any
   persistent_bottom_nav_bar: any
   flutter_chat_ui: any
   url_launcher: any
-  shared_preferences: any
   animated_splash_screen: any
   double_back_to_close_app: any
   form_validator: any
-  flutter_otp_text_field: any
+  shared_preferences: any
   curved_navigation_bar: any
   syncfusion_flutter_datepicker: any
   flutter_rating_bar: any
@@ -52,7 +51,10 @@ dependencies:
   backdrop: any
   flutter_markdown: any
   share_plus: any
+  the_validator: any
+  flutter_secure_storage: any
   cool_alert: any
+  pinput: any
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -94,6 +96,7 @@ flutter:
     - assets/policies/
     - assets/images/searchImages/
     - assets/images/paymentImages/paymentiIcons/
+    - assets/images/newImages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
           )
         ],
       ),
-      nextScreen: EventoController.eventoController.isAppLaunched??false ? const HomePageHolder() : const OnBoarding(),
+      nextScreen: EventoController.eventoController.isAppLaunched??false ? EventoController.eventoController.redirectingPage as Widget : const OnBoarding(),
       splashTransition: SplashTransition.fadeTransition,
     );
   }

@@ -1,9 +1,10 @@
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/constants/constants.dart';
-import 'package:evento_user/controller/getx_controller.dart';
+import 'package:evento_user/controller/profile_updation/password_%20updating.dart';
 import 'package:evento_user/sceeen/main_screens/home/home_page/category/event_details.dart';
 import 'package:evento_user/sceeen/main_screens/profile_user/profile_update.dart';
 import 'package:evento_user/widgets/data_textfield.dart';
+import 'package:evento_user/widgets/snackbar.dart';
 import 'package:evento_user/widgets/text_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,7 +129,7 @@ class UserProfile extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 Get.back();
-                Get.to(() => const UpdateProfile());
+                Get.to(() => UpdateProfile());
               },
               child: const CommonText(
                 text: "Update Profile",
@@ -160,7 +161,7 @@ class UserProfile extends StatelessWidget {
   }
 
   buildUpdatePasswordBSheet() {
-    EventoController.eventoController.clearUpdatePasswordControllers();
+    final upPassController = UpdatePasswordController.updatePasswordController;
     Get.bottomSheet(
       Container(
         decoration: const BoxDecoration(
@@ -185,8 +186,7 @@ class UserProfile extends StatelessWidget {
                 ),
                 DataTextFields(
                   hintText: "Current Password",
-                  controller: EventoController
-                      .eventoController.passwordEditingController,
+                  controller: upPassController.currentPassword,
                   minLength: 5,
                   maxLength: 8,
                 ),
@@ -196,7 +196,7 @@ class UserProfile extends StatelessWidget {
                 DataTextFields(
                   hintText: "New Password",
                   controller:
-                      EventoController.eventoController.newPasswordController,
+                  upPassController.newPasswordController,
                   minLength: 5,
                   maxLength: 8,
                 ),
@@ -206,8 +206,8 @@ class UserProfile extends StatelessWidget {
                 TextButton(
                     onPressed: () {
                       Get.back();
-                      EventoController.eventoController.commonSnackBar(
-                          "Password", "Password Updated Successfully");
+                      commonSnackBar(
+                          title: "Password", message: "Password Updated Successfully");
                     },
                     child: const Text(
                       "Save",

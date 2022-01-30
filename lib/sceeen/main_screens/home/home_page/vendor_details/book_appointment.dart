@@ -1,5 +1,6 @@
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/constants/constants.dart';
+import 'package:evento_user/controller/event_details_controller/event_name_creating.dart';
 import 'package:evento_user/controller/getx_controller.dart';
 import 'package:evento_user/sceeen/main_screens/home/home_page/category/fillout_event_details.dart';
 import 'package:evento_user/widgets/appbar_common.dart';
@@ -125,6 +126,7 @@ class BookAppointment extends StatelessWidget {
   }
 
   buildBottomSheet() {
+    final eventCreatingController = EventNameCreatingController.eNameController;
     return Get.bottomSheet(
       Container(
         height: 550.h,
@@ -160,7 +162,7 @@ class BookAppointment extends StatelessWidget {
                 size: 15.2,
               ),
               DataTextFields(
-                controller: EventoController.eventoController.createdEventName,
+                controller: eventCreatingController.createdEventName,
                 hintText: "Name the Event",
               ),
               SizedBox(
@@ -172,7 +174,7 @@ class BookAppointment extends StatelessWidget {
                 size: 15.2,
               ),
               DataTextFields(
-                controller: EventoController.eventoController.createdEventDate,
+                controller: eventCreatingController.createdEventDate,
                 hintText: "Date of the Event",
               ),
               SizedBox(
@@ -183,7 +185,7 @@ class BookAppointment extends StatelessWidget {
                 child: commonButton(
                   text: "Continue",
                   onPressed: () {
-                    Get.to(() => const FilloutEventDetails());
+                    Get.to(() => FilloutEventDetails());
                   },
                 ),
               ),

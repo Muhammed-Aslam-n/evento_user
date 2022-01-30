@@ -1,11 +1,11 @@
 import 'dart:io';
-
-import 'package:evento_user/api_helper/api_helper.dart';
-import 'package:evento_user/api_helper/model/registration.dart';
+import 'package:evento_user/api_helper/api_constants.dart';
+import 'package:evento_user/api_helper/services/register/register_vendor.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/constants/constants.dart';
-import 'package:evento_user/sceeen/authentication_screens/register/setup_profile.dart';
+import 'package:evento_user/sceeen/authentication_screens/login/login_home.dart';
 import 'package:evento_user/sceeen/main_screens/chat/chat_user.dart';
+import 'package:evento_user/sceeen/main_screens/home/holder/evento_userhome_holder.dart';
 import 'package:evento_user/sceeen/main_screens/home/home_page/home.dart';
 import 'package:evento_user/sceeen/main_screens/profile_user/profile_view.dart';
 import 'package:flutter/material.dart';
@@ -17,49 +17,11 @@ class EventoController extends GetxController{
 
   // -----------------------------------------------------------------------------
 
-  // Section to Handle all the User Login / Register  Authentication
-
-  TextEditingController emailEditingController = TextEditingController();
-  TextEditingController passwordEditingController = TextEditingController();
-
-  // SignUp Section TextEditingControllers
-
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController confirmPasswordEditingController =
-  TextEditingController();
-  TextEditingController placeController = TextEditingController();
-  TextEditingController cityEditingController = TextEditingController();
-  TextEditingController districtController = TextEditingController();
-  TextEditingController userStateController = TextEditingController();
-  // User Username Updating
-
-  TextEditingController currentUsernameController = TextEditingController().obs();
-  TextEditingController newUsernameController = TextEditingController().obs();
-
-  // User Password Updating
-  TextEditingController newPasswordController = TextEditingController().obs();
-
-  TextEditingController createdEventName = TextEditingController();
-  TextEditingController createdEventDate = TextEditingController();
-
-  // Event Place Details Holders
-  TextEditingController venueNameController = TextEditingController();
-  TextEditingController venueAddressController = TextEditingController();
-  TextEditingController venueContact1Controller = TextEditingController();
-  TextEditingController venueContact2Controller = TextEditingController();
-
-  //------------------------------------------------------------------------------
-
-
   @override
   void onInit() async {
+    await redirectToHomeOrLoginPage();
     prefs = await _prefs;
-    prefs.clear();
     checkAppLaunched();
-
     super.onInit();
   }
 
@@ -83,55 +45,36 @@ class EventoController extends GetxController{
         "value from SharedPreference is ${isAppLaunched.toString()} You may be set clear() before this function poyi ath sheriyaakk");
   }
 
-  //------------------------------------------------------------------------------
+  Widget? redirectingPage;
+  String? isLogged;
 
-  List<String> regDetailList = <String>[];
-
-  saveRegister1values() {
-    regDetailList.addAll([
-      firstNameController.text,
-      lastNameController.text,
-      userNameController.text
-    ]);
-    EventoController.eventoController.firstNameController.clear();
-    EventoController.eventoController.lastNameController.clear();
-    EventoController.eventoController.userNameController.clear();
-  }
-
-  saveRegister2values() {
-    regDetailList.addAll([
-      emailEditingController.text,
-      phoneNumberController.text,
-      passwordEditingController.text,
-      confirmPasswordEditingController.text
-    ]);
-    clearSignup2Controllers();
-  }
-
-  registerVendor() async {
-    final model = EventoRegistration(
-        firstName: regDetailList[0],
-        lastName: regDetailList[1],
-        username: regDetailList[2],
-        email: regDetailList[3],
-        phoneNumber: regDetailList[4],
-        password: regDetailList[5],
-        password2: regDetailList[6]);
-    ApiService()
-        .createVendor(model);
+  redirectToHomeOrLoginPage() async {
+    isLogged =
+    await VendorRegisterApi.secureStorage.read(key: didUserLoggedKey);
+    debugPrint("DID USER LOGGED OR NOT : $isLogged");
+    if (isLogged == loggedStatus) {
+      redirectingPage = const HomePageHolder();
+    } else {
+      redirectingPage = LoginHome();
+    }
+    debugPrint("Value of isLogged is $isLogged");
   }
 
 
-
-
-
-
-
+  logoutVendor() async {
+    await VendorRegisterApi.secureStorage.deleteAll();
+    await VendorRegisterApi.secureStorage
+        .write(key: didUserLoggedKey, value: logoutStatus)
+        .then((value) => Get.offNamed('login'));
+  }
 
 
 
   // -----------------------------------------------------------------------------
+
+
   // Section After Authentication
+
   String userSelectedProfession = 'Photography'.obs();
 
 // Home BottomNavigation Items
@@ -194,26 +137,10 @@ class EventoController extends GetxController{
   // SelectedVendorPage PlaceHolders
 
   String? selectedCategoryName = ''.obs();
-
-
   TextEditingController searchQueryController = TextEditingController();
-
   String? selectedVendorPerson = ''.obs();
   String? selectedVendorAmount = ''.obs();
   String? selectedVendorRating = ''.obs();
-
-  // Event Creating BottomSheet
-
-
-  String? latitude,longitude;
-
-
-  clearVenueDetailsController(){
-    venueNameController.clear();
-    venueAddressController.clear();
-    venueContact1Controller.clear();
-    venueContact2Controller.clear();
-  }
 
 
   // User Payment Section
@@ -224,12 +151,6 @@ class EventoController extends GetxController{
     subscriptionMethodValue = value;
     update(['subscriptionMethod']);
   }
-
-
-
-
-
-
 
 
 
@@ -253,9 +174,6 @@ class EventoController extends GetxController{
     update(['showCaseSection']);
   }
 
-// User Profile Updating
-
-
 
 
 
@@ -266,13 +184,6 @@ class EventoController extends GetxController{
   clearFeedbackController(){
     feedbackController.clear();
   }
-
-
-
-
-
-
-
 
   commonSnackBar(title, message) {
     Get.snackbar(
@@ -285,36 +196,5 @@ class EventoController extends GetxController{
       margin: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
       snackPosition: SnackPosition.BOTTOM,
     );
-  }
-
-
-
-  clearLoginControllers(){
-    emailEditingController.clear();
-    passwordEditingController.clear();
-  }
-
-  clearSignup2Controllers(){
-    phoneNumberController.clear();
-    emailEditingController.clear();
-    passwordEditingController.clear();
-    confirmPasswordEditingController.clear();
-  }
-
-  clearProfileControllers() {
-    placeController.clear();
-    cityEditingController.clear();
-    districtController.clear();
-    userStateController.clear();
-  }
-
-  clearUsernameUpdatingControllers() {
-    userNameController.clear();
-    newUsernameController.clear();
-  }
-
-  clearUpdatePasswordControllers() {
-    passwordEditingController.clear();
-    newPasswordController.clear();
   }
 }
