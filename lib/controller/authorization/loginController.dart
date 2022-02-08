@@ -36,12 +36,6 @@ class LoginController extends GetxController{
     emailEditingController.clear();
     passwordEditingController.clear();
   }
-
-
-
-
-
-
   @override
   void dispose() {
     emailEditingController.dispose();

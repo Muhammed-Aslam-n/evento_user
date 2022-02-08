@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:evento_user/api_helper/model/registration.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/authorization/registerController.dart';
-import 'package:evento_user/sceeen/authentication_screens/forgot_password/register_otp_section.dart';
+import 'package:evento_user/screens/authentication_screens/forgot_password/register_otp_section.dart';
 import 'package:evento_user/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';

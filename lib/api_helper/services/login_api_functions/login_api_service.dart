@@ -1,10 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:evento_user/api_helper/model/login.dart';
+import 'package:evento_user/api_helper/model/profile/wholeProfileModel.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/authorization/loginController.dart';
+import 'package:evento_user/controller/home/homeController.dart';
+import 'package:evento_user/controller/profile/profileWholeController.dart';
+import 'package:evento_user/controller/profile/profile_updation/updateProfileController.dart';
+import 'package:evento_user/screens/authentication_screens/forgot_password/register_otp_section.dart';
+import 'package:evento_user/screens/authentication_screens/login/login_home.dart';
 import 'package:evento_user/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import '../../api_constants.dart';
 
@@ -25,56 +33,47 @@ class LoginApiService {
         data: loginModel,
       );
       if (response.statusCode == 200) {
-        String? accessKey =
-            await secureStorage.read(key: accesstokenStorageKey);
-        String? refKey = await secureStorage.read(key: refreshTokenStorageKey);
-        if (accessKey != null) {
-          await secureStorage.delete(key: accesstokenStorageKey);
-          await secureStorage.write(
-              key: accesstokenStorageKey, value: response.data['access']);
+        await secureStorage.write(
+            key: accesstokenStorageKey, value: response.data['access']);
+        await secureStorage.write(
+            key: refreshTokenStorageKey, value: response.data['refresh']);
+        await secureStorage.write(key: didUserLoggedKey, value: logoutStatus);
+
+        if (response.data['is_verified'] == false) {
+          Get.offUntil(MaterialPageRoute(builder: (BuildContext context) =>const RegisterVendorOTPSection()),(route) => false);
         } else {
-          await secureStorage.write(
-              key: accesstokenStorageKey, value: response.data['access']);
+          debugPrint("Function to Show UserShortData is Called ");
+          await secureStorage.write(key: didUserLoggedKey, value: loggedStatus);
+          await HomeController.homeController.checkLogStatus();
+          await ShowWholeProfileDetailsController.showWholeProfileDetailsController.checkLogStatus();
+          UpdateProfileController.updateProfileController.userWholeDetailsModel = ShowWholeProfileDetailsController.showWholeProfileDetailsController.userWholeDetailsModel;
+
+          Get.offNamedUntil('/holder', (route) => false);
         }
-        if (refKey != null) {
-          secureStorage.delete(key: refreshTokenStorageKey);
-          await secureStorage.write(
-              key: refreshTokenStorageKey, value: response.data['refresh']);
-        } else {
-          await secureStorage.write(
-              key: refreshTokenStorageKey, value: response.data['refresh']);
-        }
-        await secureStorage.write(key: didUserLoggedKey, value: loggedStatus);
-        controller.loginCircularBar();
-        Navigator.of(context).popAndPushNamed('holder');
+        debugPrint("Stored Access token successfully");
         debugPrint("Login was Successful");
       }
     } on DioError catch (dioError) {
-      controller.loginCircularBar();
       commonSnackBar(
         title: "Login",
         message: "Username or Password incorrect",
         bgColor: warningColors,
         color: whiteColor,
       );
-      debugPrint(dioError.toString());
+      debugPrint("Login Exception Caught");
+      debugPrint("--------------------------");
+      debugPrint(dioError.message.toString());
+      debugPrint(dioError.response!.statusMessage.toString());
+      debugPrint(dioError.response!.statusCode.toString());
+      debugPrint("--------------------------");
     }
   }
 
-  refreshToken() async {
-    String? oldAccessToken =
-        await secureStorage.read(key: accesstokenStorageKey);
-    String? oldRefreshToken =
-        await secureStorage.read(key: refreshTokenStorageKey);
-    final response = await _dio!
-        .post(refreshTokenUrl, data: {'refresh': '$oldRefreshToken'});
-    var newAccessToken = response.data;
-    // var newRefreshTkn = jsonDecode(response.data)['refresh_token'];
-    if (oldAccessToken != newAccessToken) {
-      await secureStorage.delete(key: accesstokenStorageKey);
-      await secureStorage.write(
-          key: accesstokenStorageKey, value: newAccessToken);
-      debugPrint("REKSHAPPETTU MONE.... SAADHANAM KAYYILUND");
-    }
+  logoutVendor() async {
+    await secureStorage.deleteAll();
+    await secureStorage
+        .write(key: didUserLoggedKey, value: logoutStatus)
+        .then((value) => Get.off(() => LoginHome()));
   }
+
 }

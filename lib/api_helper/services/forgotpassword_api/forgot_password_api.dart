@@ -2,9 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:evento_user/api_helper/api_constants.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/authorization/forgotController.dart';
-import 'package:evento_user/sceeen/authentication_screens/forgot_password/forgot_otp_section.dart';
-import 'package:evento_user/sceeen/authentication_screens/login/login_home.dart';
-import 'package:evento_user/sceeen/authentication_screens/update_forgot_password/update_forgot_password.dart';
+import 'package:evento_user/screens/authentication_screens/forgot_password/forgot_otp_section.dart';
+import 'package:evento_user/screens/authentication_screens/forgot_password/update_forgot_password/update_forgot_password.dart';
 import 'package:evento_user/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -46,7 +45,7 @@ class ForgotPasswordAPI {
           bgColor: greenColor,
           color: whiteColor,
         );
-        Get.to(() => ForgotPasswordOtpSection());
+        Get.off(() => ForgotPasswordOtpSection());
       }
     } on DioError catch (dioError) {
       controller.fpSendOtpF();
@@ -72,7 +71,7 @@ class ForgotPasswordAPI {
       else{
         controller.fpConfirmOtpF();
         commonSnackBar(title: "OTP Verification",message: "Verification Success",color: whiteColor,bgColor: greenColor);
-        Get.to(()=>UpdateForgotPassword());
+        Get.off(()=>UpdateForgotPassword());
       }
     }on DioError catch(dioError){
       controller.fpConfirmOtpF();
@@ -84,6 +83,7 @@ class ForgotPasswordAPI {
 
   Future updateForgotPassword({phoneNumber,newPassword}) async{
     debugPrint("The new Password to Update is $newPassword");
+    debugPrint("Getting Values are $phoneNumber , $newPassword");
     try{
       Response updateFPswrdResponse = await _dio!.post(updateFPaswdURL,data: {'phone_number':'$phoneNumber','password':'$newPassword'});
       if(updateFPswrdResponse.data['errors'] != null){

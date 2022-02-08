@@ -16,3 +16,4 @@ const warningColors = Color(0xFFFF6347);
 const otpBoxColor = Color(0xFFC9C9C9);
 const resheduleBgColor = Color(0xFFD76060);
 const greenColor = Color(0xFF58BC8A);
+const primaryTextColorr = Color(0xFF0253b3);

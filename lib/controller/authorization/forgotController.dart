@@ -16,6 +16,15 @@ class EventoForgotController extends GetxController{
   TextEditingController fpConfirmNewPassword = TextEditingController();
 
 
+  clearControllers(){
+    fpPhoneNumber.clear();
+    fpOTP.clear();
+    fpNewPassword.clear();
+    fpConfirmNewPassword.clear();
+  }
+
+
+
   // page 1
   bool fpSendOtp = false.obs();
 
@@ -49,6 +58,13 @@ class EventoForgotController extends GetxController{
      ForgotPasswordAPI().updateForgotPassword(phoneNumber:fpPhoneNumber.text,newPassword:fpNewPassword.text);
    }
 
-
+   @override
+   void dispose() {
+     fpPhoneNumber.dispose();
+     fpOTP.dispose();
+     fpNewPassword.dispose();
+     fpConfirmNewPassword.dispose();
+     super.dispose();
+   }
 
 }
