@@ -18,8 +18,6 @@ class UserPlaceMarking {
     longitude = latLong.longitude;
   }
 
-
-
   openMapPage() {
     Get.to(() => const OpenMapScreen());
   }

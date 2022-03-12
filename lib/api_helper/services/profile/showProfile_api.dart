@@ -25,6 +25,7 @@ class UserWholeProfileAPI{
     }on DioError catch(dioError){
       debugPrint("ERROR CAUGHT ON FETCHING USER WHOLE DETAILS");
     }
+    return null;
   }
 
 

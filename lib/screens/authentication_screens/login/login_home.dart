@@ -229,7 +229,7 @@ class LoginHome extends StatelessWidget {
 
   void validateToLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      loginController.loginCircularBar();
+      // loginController.loginCircularBar();
       loginController.loginVendor(context);
       FocusScope.of(context).unfocus();
     }

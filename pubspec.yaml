@@ -57,6 +57,7 @@ dependencies:
   cool_alert: any
   pinput: any
   http_parser: any
+  intl: any
 
 
   # The following adds the Cupertino Icons font to your application.

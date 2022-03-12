@@ -28,32 +28,41 @@ class HomeControllerAPI{
       debugPrint(dioError.response!.statusMessage);
       debugPrint(dioError.response!.statusCode.toString());
       if(dioError.response!.statusCode == 401 || dioError.response!.statusCode == 403){
-        // await refreshToken();
         debugPrint("Authorization error caught on Fetching ShortDetails");
       }
     }
+    return null;
   }
 
 
 
   refreshToken() async {
-    debugPrint("saveVendorProfileDetails(): REFRESH TOKEN CALLED");
-    String? oldAccessToken =
-    await secureStorage.read(key: accesstokenStorageKey);
-    String? oldRefreshToken =
-    await secureStorage.read(key: refreshTokenStorageKey);
-    final response = await _dio!
-        .post(refreshTokenUrl, data: {'refresh': '$oldRefreshToken'});
-    var newAccessToken = response.data['access'];
-    var newRefreshToken = response.data['refresh'];
-    if (oldAccessToken != newAccessToken) {
-      await secureStorage.write(
-          key: accesstokenStorageKey, value: newAccessToken);
-      await secureStorage.write(
-          key: refreshTokenStorageKey, value: newRefreshToken);
-      if (newRefreshToken != oldRefreshToken &&
-          newAccessToken != oldAccessToken) {
-        debugPrint("NEW REFRESH TOKEN CAUGHT");
+    debugPrint("fetchUserShortProfileDetails(): REFRESH TOKEN CALLED");
+    try{
+      String? oldAccessToken =
+      await secureStorage.read(key: accesstokenStorageKey);
+      String? oldRefreshToken =
+      await secureStorage.read(key: refreshTokenStorageKey);
+      final response = await _dio!
+          .post(refreshTokenUrl, data: {'refresh': '$oldRefreshToken'});
+      var newAccessToken = response.data['access'];
+      var newRefreshToken = response.data['refresh'];
+      if (oldAccessToken != newAccessToken) {
+        await secureStorage.write(
+            key: accesstokenStorageKey, value: newAccessToken);
+        await secureStorage.write(
+            key: refreshTokenStorageKey, value: newRefreshToken);
+        if (newRefreshToken != oldRefreshToken &&
+            newAccessToken != oldAccessToken) {
+          debugPrint("NEW REFRESH TOKEN CAUGHT");
+        }
+        // return
+      }
+    }on DioError catch (dioError){
+      debugPrint("Error Caught in Refresh token of UserShort Details");
+      if(dioError.response!.statusCode == 401){
+        debugPrint("Refresh Token Error in Fetching UserShort Details");
+        // await refreshToken();
       }
     }
   }

@@ -89,7 +89,7 @@ class UserHome extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              const CategoryDisplayWidget(),
+              CategoryDisplayWidget(),
               SizedBox(
                 height: 30.h,
               )

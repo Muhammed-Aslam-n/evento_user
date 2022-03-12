@@ -12,7 +12,7 @@ class LoginController extends GetxController{
   TextEditingController emailEditingController =
   TextEditingController(text: "aslam@gmail.com");
   TextEditingController passwordEditingController =
-  TextEditingController(text: "Abcd@123");
+  TextEditingController(text: "Abcd@1234");
 
   // Login Vendor
 

@@ -31,6 +31,7 @@ class FetchVendorAPI{
     } on DioError catch (dioError) {
       debugPrint(dioError.message.toString());
     }
+    return null;
   }
 
 }

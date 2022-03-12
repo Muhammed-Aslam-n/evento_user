@@ -1,6 +1,6 @@
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/constants/constants.dart';
-import 'package:evento_user/controller/event_details_controller/event_name_creating.dart';
+import 'package:evento_user/controller/event_details_controller/eventcreating_controller.dart';
 import 'package:evento_user/controller/getx_controller.dart';
 import 'package:evento_user/screens/main_screens/home/home_page/category/fillout_event_details.dart';
 import 'package:evento_user/widgets/appbar_common.dart';
@@ -79,7 +79,7 @@ class BookAppointment extends StatelessWidget {
                 onSubmit: (selectedDates) async {
                   bookedDates.add({'Date': selectedDates});
                   debugPrint(bookedDates.toString());
-                  buildBottomSheet();
+                  // buildBottomSheet();
                   debugPrint(selectedDates.toString());
                 },
               ),
@@ -125,77 +125,77 @@ class BookAppointment extends StatelessWidget {
     );
   }
 
-  buildBottomSheet() {
-    final eventCreatingController = EventNameCreatingController.eNameController;
-    return Get.bottomSheet(
-      Container(
-        height: 550.h,
-        // width: double.maxFinite,
-        decoration: const BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.only(
-            topLeft: searchIconCRadius,
-            topRight: searchIconCRadius,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20.h,
-              ),
-              const Align(
-                  alignment: Alignment.center,
-                  child: CommonText(
-                    text: "Create an Event",
-                    color: primaryColor,
-                    size: 18,
-                  )),
-              SizedBox(
-                height: 20.h,
-              ),
-              const CommonText(
-                text: "Event",
-                color: primaryColor,
-                size: 15.2,
-              ),
-              DataTextFields(
-                controller: eventCreatingController.createdEventName,
-                hintText: "Name the Event",
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              const CommonText(
-                text: "Date",
-                color: primaryColor,
-                size: 15.2,
-              ),
-              DataTextFields(
-                controller: eventCreatingController.createdEventDate,
-                hintText: "Date of the Event",
-              ),
-              SizedBox(
-                height: 35.h,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: commonButton(
-                  text: "Continue",
-                  onPressed: () {
-                    Get.to(() => FilloutEventDetails());
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      isDismissible: true,
-      isScrollControlled: true,
-      enableDrag: true,
-    );
-  }
+  // buildBottomSheet() {
+  //   final eventCreatingController = EventNameCreatingController.eNameController;
+  //   return Get.bottomSheet(
+  //     Container(
+  //       height: 550.h,
+  //       // width: double.maxFinite,
+  //       decoration: const BoxDecoration(
+  //         color: whiteColor,
+  //         borderRadius: BorderRadius.only(
+  //           topLeft: searchIconCRadius,
+  //           topRight: searchIconCRadius,
+  //         ),
+  //       ),
+  //       child: Padding(
+  //         padding: const EdgeInsets.symmetric(horizontal: 20),
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             SizedBox(
+  //               height: 20.h,
+  //             ),
+  //             const Align(
+  //                 alignment: Alignment.center,
+  //                 child: CommonText(
+  //                   text: "Create an Event",
+  //                   color: primaryColor,
+  //                   size: 18,
+  //                 )),
+  //             SizedBox(
+  //               height: 20.h,
+  //             ),
+  //             const CommonText(
+  //               text: "Event",
+  //               color: primaryColor,
+  //               size: 15.2,
+  //             ),
+  //             DataTextFields(
+  //               controller: eventCreatingController.createdEventName,
+  //               hintText: "Name the Event",
+  //             ),
+  //             SizedBox(
+  //               height: 20.h,
+  //             ),
+  //             const CommonText(
+  //               text: "Date",
+  //               color: primaryColor,
+  //               size: 15.2,
+  //             ),
+  //             DataTextFields(
+  //               controller: eventCreatingController.createdEventDate,
+  //               hintText: "Date of the Event",
+  //             ),
+  //             SizedBox(
+  //               height: 35.h,
+  //             ),
+  //             Align(
+  //               alignment: Alignment.center,
+  //               child: commonButton(
+  //                 text: "Continue",
+  //                 onPressed: () {
+  //                   Get.to(() => FilloutEventDetails());
+  //                 },
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //     isDismissible: true,
+  //     isScrollControlled: true,
+  //     enableDrag: true,
+  //   );
+  // }
 }

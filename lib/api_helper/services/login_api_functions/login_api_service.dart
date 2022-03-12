@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:evento_user/api_helper/model/login.dart';
-import 'package:evento_user/api_helper/model/profile/wholeProfileModel.dart';
 import 'package:evento_user/constants/colors.dart';
 import 'package:evento_user/controller/authorization/loginController.dart';
 import 'package:evento_user/controller/home/homeController.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-
 import '../../api_constants.dart';
 
 final controller = LoginController.loginController;
@@ -32,6 +30,7 @@ class LoginApiService {
         loginUrl,
         data: loginModel,
       );
+      debugPrint("Response after loginBtn Click is $response");
       if (response.statusCode == 200) {
         await secureStorage.write(
             key: accesstokenStorageKey, value: response.data['access']);

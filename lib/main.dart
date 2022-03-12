@@ -1,5 +1,5 @@
 import 'package:evento_user/controller/authorization/forgotController.dart';
-import 'package:evento_user/controller/event_details_controller/event_name_creating.dart';
+import 'package:evento_user/controller/event_details_controller/eventcreating_controller.dart';
 import 'package:evento_user/controller/home/homeController.dart';
 import 'package:evento_user/controller/user_map_marking/user_map_controller.dart';
 import 'package:evento_user/screens/authentication_screens/login/login_home.dart';
@@ -24,9 +24,9 @@ void main() {
   Get.put(EventoController());
   Get.put(EventoForgotController());
   Get.put(LoginController());
+  Get.put(HomeController());
   Get.put(ShowWholeProfileDetailsController());
   Get.put(RegisterController());
-  Get.put(HomeController());
   Get.put(UpdatePasswordController());
   Get.put(UpdateProfileController());
   Get.put(UsernameUpdate());

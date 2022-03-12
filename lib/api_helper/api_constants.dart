@@ -11,10 +11,14 @@ const fpOtpVerificationURL = "http://54.146.246.128/api/forget/otpverify/";
 const updateFPaswdURL = "http://54.146.246.128/api/forget/changepass/";
 
 
+const createNewEventURL = "http://54.146.246.128/api/user/eventlist/";
+
 const userShortProfileURL = "http://54.146.246.128/api/user/home/";
 const userFullDetailsURL = "http://54.146.246.128/api/user/profile";
 const userPassUpdateURL  = "http://54.146.246.128/api/updatepassword/";
 const userProfilePicUpdateURL = "http://54.146.246.128/api/user/changepropic/";
+
+
 
 
 const accesstokenStorageKey = "EventoAccessToken";
